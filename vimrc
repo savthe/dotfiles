@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
 "Plug 'junegunn/vim-easy-align'
 
 Plug 'vim-airline/vim-airline'
-
+Plug 'ycm-core/YouCompleteMe'
 " Any valid git URL is allowed
 "Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
@@ -41,6 +41,11 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 "Plug 'jaredgorski/spacecamp'
 "Plug 'ParamagicDev/vim-medic_chalk'
 "Plug 'eemed/sitruuna.vim'
+
+"Plug 'https://github.com/tomasr/molokai'
+"Plug 'https://github.com/gosukiwi/vim-atom-dark'
+"Plug 'https://github.com/joshdick/onedark.vim'
+
 call plug#end()
 
 colors night
@@ -67,6 +72,7 @@ set ttyfast
 set cursorline
 set ruler
 set makeprg=make
+set completeopt-=preview
 let g:airline#extensions#whitespace#checks = [ 'indent', 'long' ]
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
@@ -78,9 +84,13 @@ let g:airline#extensions#tabline#tab_min_count = 2
 nnoremap ; :
 map <F4> :NERDTreeToggle<CR>
 map <F5> :call RunExt()<CR>
-map <F6> :!clang++ -std=c++11 -O3 -lpthread -Wall % -I. -o %:r && ./%:r<CR>
-map <F9> :!clang++ -std=c++11 -O3 -lpthread -Wall -lsfml-graphics -lsfml-window -lsfml-system % -I. -o %:r && ./%:r<CR>
+map <F6> :!clang++ -std=c++17 -O3 -lpthread -Wall % -I. -o %:r && ./%:r<CR>
+map <F9> :!clang++ -std=c++17 -O3 -lpthread -Wall -lsfml-graphics -lsfml-window -lsfml-system % -I. -o %:r && ./%:r<CR>
 map <F7> :!make run<CR>
+
+" Disabling annoying ycm auto messages and enabling them usint CTRL+I
+let g:ycm_auto_hover = ''
+nmap <C-I> <plug>(YCMHover)
 
 set spelllang=ru
 :map <F8> :if exists("g:syntax_on") <Bar>
@@ -103,14 +113,15 @@ function RunExt()
 		:silent !pdflatex -shell-escape % 
 		:silent !pdflatex -shell-escape % 
 		silent !rm %:r.log %:r.toc %:r.aux %:r.out
-		!(evince %:r.pdf &)
+		:silent exec "!(nohup evince %:r.pdf &) > /dev/null"
+		:redraw!
 		"!(/home/sav/scripts/okular.sh %:r.pdf &)
 		"let vieweropen = system('ps -fe | grep "evince %:r.pdf" | grep -vc grep')
 		":echom "TEST: "
 		"!(~/scripts/okular.sh %:r.pdf)
 	elseif ext == "cpp"
 		"!clang++ -g -std=c++11 -lpthread -Wall % -I. -o %:r && ./%:r
-		!clang++ -g -std=c++11 -lpthread -Wall % -I. -o %:r && ./%:r
+		!clang++ -g -std=c++17 -lpthread -Wall % -I. -o %:r && ./%:r
 	elseif ext == "c"
 		!clang -g -lm % -I. -o %:r && ./%:r
 	elseif ext == "xtex"
