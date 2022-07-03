@@ -36,8 +36,7 @@ set guioptions-=r  "remove right-hand scroll bar
 set spelllang=en,ru
 
 "===Airline===
-"typo in theme... I like default look
-let g:airline_theme='seagul'
+let g:airline_theme='jellybeans'
 "let g:airline#extensions#whitespace#checks = [ 'indent', 'long' ]
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
@@ -46,6 +45,9 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline#extensions#languageclient#enabled = 0  
+let g:airline#extensions#nvimlsp#enabled = 0
+let g:airline#extensions#coc#enabled = 0
 
 nmap ; :
 nmap <F3> :TagbarToggle<CR>
