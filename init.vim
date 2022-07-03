@@ -33,6 +33,7 @@ set tabstop=2 shiftwidth=2 expandtab
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
+set spelllang=en,ru
 
 "===Airline===
 "typo in theme... I like default look
@@ -50,6 +51,8 @@ nmap ; :
 nmap <F3> :TagbarToggle<CR>
 nmap <F4> :NERDTreeToggle<CR>
 nmap <F5> :call RunExt()<CR>
+nnoremap <silent> <F8> :set spell!<cr>
+inoremap <silent> <F8> <C-O>:set spell!<cr>
 
 "===COC===
 "Fix for Float box color
