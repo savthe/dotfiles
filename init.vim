@@ -34,6 +34,7 @@ set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set spelllang=en,ru
+set clipboard+=unnamedplus
 
 "===Airline===
 let g:airline_theme='jellybeans'
