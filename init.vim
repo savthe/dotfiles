@@ -21,6 +21,7 @@ Plug 'https://github.com/jaredgorski/SpaceCamp'
 Plug 'https://github.com/gosukiwi/vim-atom-dark'
 Plug 'tribela/vim-transparent'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'https://github.com/tpope/vim-fugitive'
 call plug#end()
 
 colorscheme night-owl 
@@ -63,12 +64,15 @@ highlight CocErrorFloat ctermfg=White guifg=#ffffff
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+nnoremap <C-G> <C-B>
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
+"nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gd :call CocAction('jumpDefinition', 'tabe')<CR>
+nmap <silent> Gd :call CocAction('jumpImplementation', 'tabe')<CR>
 
 "===NerdTree===
 let NERDTreeMinimalUI = 1
