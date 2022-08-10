@@ -28,6 +28,7 @@ colorscheme night-owl
 
 set signcolumn=number
 set termguicolors
+set cc=100
 set cursorline
 set number 
 set tabstop=2 shiftwidth=2 expandtab
@@ -84,6 +85,7 @@ function! RunExt() abort
   elseif &filetype ==# 'cpp'
     terminal g++ % && ./a.out
   elseif &filetype ==# 'tex'
+		!pdflatex -shell-escape % 
 		!pdflatex -shell-escape % 
 		!rm %:r.log %:r.toc %:r.aux %:r.out
 		!evince %:r.pdf &
