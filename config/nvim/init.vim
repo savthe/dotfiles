@@ -1,11 +1,24 @@
+" This is NVim config. It usually goes to ~/.config/nvim
+" It should be compatable with vim, but needs to be renamed.
+
+" Some plugins depend on external packets. Use this command:
+" sudo apt install npm ripgrep fonts-powerline clangd
+"
 " Use Vim Plug plugin to manage plugins.
 " https://github.com/junegunn/vim-plug
-
+" After Vim Plug is installed, run vim and ':PlugInstall'. 
 call plug#begin()
+
+" File manager plugin (F4)
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+" Fuzzy finder (for text, files, text in files in subfolders and so on)
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+" Cute bottom bar. You should install fonts manually: sudo apt install fonts-powerline
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " CoC - Conqueror of Completion is great plugin, but it needs recent version of nodejs. If you don't
 " want to update nodejs, change 'branch' to 'tag' and find a tag which is compatable with you version
@@ -14,13 +27,12 @@ Plug 'vim-airline/vim-airline'
 " :CocInstall coc-clangd // you'll need clangd for this: sudo apt install clangd
 " :CocInstall pyright
 " :CocInstall coc-sh
-
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Shows tags in current source file (F3)
 Plug 'https://github.com/preservim/tagbar'
-Plug 'vim-airline/vim-airline-themes'
 
-" Git plugin
+" Git diff and other stuff
 Plug 'https://github.com/tpope/vim-fugitive'
 
 " Colorschemes
@@ -95,9 +107,13 @@ nnoremap <silent> <F8> :set spell!<cr>
 inoremap <silent> <F8> <C-O>:set spell!<cr>
 
 let mapleader = ","
+" ,b shows opened buffers
 nmap <Leader>b :Buffers<CR>
+" ,t lists files
 nmap <Leader>t :Files<CR>
+" ,r tag search
 nmap <Leader>r :Tags<CR>
+" ,s fuzzy search of text in all files from current folder. 'sudo apt install ripgrep' for it.
 nmap <Leader>s :Rg<CR>
 
 "===COC===
