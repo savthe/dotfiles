@@ -1309,9 +1309,9 @@ button.combo:only-child arrow:disabled {
 toolbar {
   -GtkWidget-window-dragging: true;
   padding: 2px;
-  margin-top: 40px;
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-top: 20;
+  margin-left: 20;
+  margin-right: 20;
   background-color: #000800;
 }
 
@@ -3161,7 +3161,7 @@ printdialog .dialog-action-box {
  */
 frame > border,
 .frame {
-  margin: 40;
+  margin: 20;
   padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 0;
