@@ -48,6 +48,7 @@ return packer.startup(function(use)
   })
 
   use { "catppuccin/nvim", as = "catppuccin", config = [[require('config.catppuccin')]] }
+  --use { 'yasukotelin/shirotelin', config = [[require('config.shirotelin')]] }
 
   use 'majutsushi/tagbar'
 
