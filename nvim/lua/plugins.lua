@@ -42,14 +42,28 @@ return packer.startup(function(use)
 	use { 'lewis6991/impatient.nvim', config = [[require('impatient')]] }
 
 	use ( 'wbthomason/packer.nvim' ) -- Have packer manage itself	
+	use { 'dracula/vim', 
+    config = [[require('config.dracula')]] 
+  }
 
   use({ 'haishanh/night-owl.vim', as = 'night-owl', 
   --   config = [[require('config.night-owl')]]
   })
-
-  use { "catppuccin/nvim", as = "catppuccin", config = [[require('config.catppuccin')]] }
-  --use { 'yasukotelin/shirotelin', config = [[require('config.shirotelin')]] }
-
+  use 'Mofiqul/vscode.nvim'
+  use { "catppuccin/nvim", as = "catppuccin", 
+    --config = [[require('config.catppuccin')]] 
+  }
+  use { 'yasukotelin/shirotelin', 
+    --config = [[require('config.shirotelin')]] 
+  }
+  use {'nyoom-engineering/oxocarbon.nvim'}
+  use 'cormacrelf/vim-colors-github'
+  use 'navarasu/onedark.nvim'
+  use { "arzg/vim-colors-xcode"}
+  use { 'sonph/onehalf' }
+  use { "EdenEast/nightfox.nvim", 
+    --config = [[require('config.nightfox')]] 
+  }
   use 'majutsushi/tagbar'
 
   use { 'kyazdani42/nvim-tree.lua',
@@ -79,6 +93,7 @@ return packer.startup(function(use)
   use { 'hrsh7th/cmp-vsnip' }
 
   use { 'hrsh7th/vim-vsnip' }
+
 
   -- use { 'hrsh7th/cmp-nvim-lsp-signature-help', 
   --             after = "nvim-cmp",
@@ -132,6 +147,7 @@ return packer.startup(function(use)
 	-- use 'dense-analysis/ale'
 
 use { "lewis6991/hover.nvim", after = 'nvim-lspconfig', config = [[require('config.hover')]]}
+--vim.o.background = 'light'
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
