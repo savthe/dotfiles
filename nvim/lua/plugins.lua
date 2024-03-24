@@ -41,6 +41,7 @@ packer.init({
 return packer.startup(function(use)
 	use { 'lewis6991/impatient.nvim', config = [[require('impatient')]] }
 
+  use {'folke/trouble.nvim'}
 	use ( 'wbthomason/packer.nvim' ) -- Have packer manage itself	
 	use { 'dracula/vim', 
     config = [[require('config.dracula')]] 
@@ -64,8 +65,14 @@ return packer.startup(function(use)
   use { "EdenEast/nightfox.nvim", 
     --config = [[require('config.nightfox')]] 
   }
+  use {"rust-lang/rust.vim",
+    ft = "rust",
+    init = function ()
+      vim.g.rustfmt_autosave = 1
+    end
+  }
   use 'majutsushi/tagbar'
-
+  use 'nvim-tree/nvim-web-devicons' 
   use { 'kyazdani42/nvim-tree.lua',
       requires = 'kyazdani42/nvim-web-devicons',
       config = function() require'nvim-tree'.setup {} end, }
@@ -78,8 +85,12 @@ return packer.startup(function(use)
 
   use { 'onsails/lspkind-nvim', event = "VimEnter" }
 
-  use { 'simrat39/rust-tools.nvim' }
+  --use { 'simrat39/rust-tools.nvim' }
 
+  use {'mrcjkb/rustaceanvim',
+    version = '^4', 
+    ft = { 'rust' },
+  }
   use { 'hrsh7th/cmp-nvim-lsp' }
 
   use { 'hrsh7th/nvim-cmp', after = "lspkind-nvim", config = [[require('config.nvim-cmp')]] }
@@ -114,7 +125,7 @@ return packer.startup(function(use)
 
   use {'nvim-treesitter/nvim-treesitter', config = [[require('config.treesitter')]]}
 
-  use "folke/neodev.nvim"
+  --use "folke/neodev.nvim"
  
   use 'powerman/vim-plugin-ruscmd'
 

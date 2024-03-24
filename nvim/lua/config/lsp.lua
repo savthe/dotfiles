@@ -9,7 +9,15 @@ local cmp_nvim_lsp_status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not cmp_nvim_lsp_status then
 	return
 end
-
+--vim.lsp.inlay_hin=true
+--vim.lsp.inlay_hint.enable=true
+-- vim.diagnostic.config({
+--   virtual_text = false
+-- })
+--
+-- -- Show line diagnostics automatically in hover window
+-- vim.o.updatetime = 250
+-- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
@@ -74,12 +82,12 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = "rounded",
 })
 
---lspconfig.rust_analyzer.setup {
-  -- Server-specific settings. See `:help lspconfig-setup`
+-- lspconfig.rust_analyzer.setup {
+--   --Server-specific settings. See `:help lspconfig-setup`
 --  settings = {
 --    ['rust-analyzer'] = {},
- -- },
---}
+--  },
+-- }
 local opts = { noremap=true, silent=true }
 
 local function quickfix()
@@ -89,16 +97,16 @@ local function quickfix()
     })
 end
 
-local rt = require("rust-tools")
+--local rt = require("rust-tools")
 
-rt.setup({
-  server = {
-    on_attach = function(_, bufnr)
+--rt.setup({
+--  server = {
+--    on_attach = function(_, bufnr)
       -- Hover actions
-      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+--      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
       -- Code action groups
-      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-    end,
-  },
-})
+--      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+--    end,
+--  },
+--})
 vim.keymap.set('n', ',q', quickfix, opts)

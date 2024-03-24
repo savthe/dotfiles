@@ -40,6 +40,12 @@ vim.g.tagbar_sort = 0
 opt.ignorecase = true        --Игнорировать размер букв
 opt.smartcase = true         --Игнор прописных буквj
 
+opt.foldmethod = 'indent'
+opt.foldnestmax = 1
+opt.foldenable = true
+opt.foldlevel = 2
+vim.diagnostic.config({ virtual_lines = true })
+vim.diagnostic.config({ virtual_text = true })
 vim.api.nvim_set_option("clipboard","unnamedplus") 
 --
 -- Подсвечивает на доли секунды скопированную часть текста
