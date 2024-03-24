@@ -15,6 +15,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	vim.cmd([[packadd packer.nvim]])
 end
 
+-- PackerSync on save
 vim.cmd([[ 
   augroup packer_user_config
     autocmd!
@@ -39,72 +40,58 @@ packer.init({
 
 -- Install plugins
 return packer.startup(function(use)
-	use { 'lewis6991/impatient.nvim', config = [[require('impatient')]] }
+	--use { 'lewis6991/impatient.nvim', config = [[require('impatient')]] }
 
-  use {'folke/trouble.nvim'}
-	use ( 'wbthomason/packer.nvim' ) -- Have packer manage itself	
-	use { 'dracula/vim', 
-    config = [[require('config.dracula')]] 
-  }
+	use { 'wbthomason/packer.nvim' } -- Have packer manage itself	
 
-  use({ 'haishanh/night-owl.vim', as = 'night-owl', 
-  --   config = [[require('config.night-owl')]]
-  })
-  use 'Mofiqul/vscode.nvim'
-  use { "catppuccin/nvim", as = "catppuccin", 
-    --config = [[require('config.catppuccin')]] 
-  }
-  use { 'yasukotelin/shirotelin', 
-    --config = [[require('config.shirotelin')]] 
-  }
-  use {'nyoom-engineering/oxocarbon.nvim'}
-  use 'cormacrelf/vim-colors-github'
-  use 'navarasu/onedark.nvim'
-  use { "arzg/vim-colors-xcode"}
-  use { 'sonph/onehalf' }
-  use { "EdenEast/nightfox.nvim", 
-    --config = [[require('config.nightfox')]] 
-  }
-  use {"rust-lang/rust.vim",
-    ft = "rust",
-    init = function ()
-      vim.g.rustfmt_autosave = 1
-    end
-  }
-  use 'majutsushi/tagbar'
-  use 'nvim-tree/nvim-web-devicons' 
+	use { 'dracula/vim', config = [[require('config.dracula')]] }
+  --use { 'haishanh/night-owl.vim', as = 'night-owl', config = [[require('config.night-owl')]] }
+  --use { 'catppuccin/nvim', as = "catppuccin", config = [[require('config.catppuccin')]] }
+  --use { 'yasukotelin/shirotelin', config = [[require('config.shirotelin')]] }
+  --use { "EdenEast/nightfox.nvim", config = [[require('config.nightfox')]] }
+
+  use { 'majutsushi/tagbar' }
+  use { 'nvim-tree/nvim-web-devicons' }
+
   use { 'kyazdani42/nvim-tree.lua',
       requires = 'kyazdani42/nvim-web-devicons',
       config = function() require'nvim-tree'.setup {} end, }
-
-  use 'nvim-lua/popup.nvim'
 
   use { 'nvim-telescope/telescope.nvim',
       requires = { {'nvim-lua/plenary.nvim'} }, 
       config = function() require'telescope'.setup {} end, }
 
-  use { 'onsails/lspkind-nvim', event = "VimEnter" }
-
-  --use { 'simrat39/rust-tools.nvim' }
-
-  use {'mrcjkb/rustaceanvim',
-    version = '^4', 
-    ft = { 'rust' },
+  use {'nvim-lualine/lualine.nvim', 
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+    config = [[require('config.lualine')]], 
   }
+
+  use { 'onsails/lspkind-nvim', event = "VimEnter" }
   use { 'hrsh7th/cmp-nvim-lsp' }
-
   use { 'hrsh7th/nvim-cmp', after = "lspkind-nvim", config = [[require('config.nvim-cmp')]] }
-
-  use { 'hrsh7th/cmp-buffer' }
-
-  use { 'hrsh7th/cmp-path' }
-
-  use { 'hrsh7th/cmp-cmdline' }
-
-  use { 'hrsh7th/cmp-vsnip' }
-
   use { 'hrsh7th/vim-vsnip' }
+  use { 'neovim/nvim-lspconfig', config = [[require('config.lsp')]] } 
+  use { 'nvim-treesitter/nvim-treesitter', config = [[require('config.treesitter')]] }
 
+  use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }
+  use { "lewis6991/hover.nvim", after = 'nvim-lspconfig', config = [[require('config.hover')]]}
+  use { 'folke/trouble.nvim' }
+
+  use { "rust-lang/rust.vim", ft = "rust", }
+  use { 'mrcjkb/rustaceanvim', version = '^4', ft = { 'rust' }, }
+  use { 'tpope/vim-fugitive' }
+
+  use { 'powerman/vim-plugin-ruscmd' }
+
+	if PACKER_BOOTSTRAP then
+		require("packer").sync()
+	end
+  
+  --use "folke/neodev.nvim"
+  --use { 'hrsh7th/cmp-buffer' }
+  --use { 'hrsh7th/cmp-path' }
+  --use { 'hrsh7th/cmp-cmdline' }
+  --use { 'hrsh7th/cmp-vsnip' }
 
   -- use { 'hrsh7th/cmp-nvim-lsp-signature-help', 
   --             after = "nvim-cmp",
@@ -112,134 +99,5 @@ return packer.startup(function(use)
   --   require'cmp'.setup { sources = { { name = 'nvim_lsp_signature_help' } } }
   --   end,
   -- }
-  -- 
-  use {'neovim/nvim-lspconfig', config = [[require('config.lsp')]] } 
-  --use 'williamboman/nvim-lsp-installer'
-
-  -- use({
-  --       "nvimdev/lspsaga.nvim",
-  --       branch = "main",
-  --       after = "nvim-lspconfig",
-  --       config = [[require('config.lspsaga')]] 
-  --   })
-
-  use {'nvim-treesitter/nvim-treesitter', config = [[require('config.treesitter')]]}
-
-  --use "folke/neodev.nvim"
- 
-  use 'powerman/vim-plugin-ruscmd'
-
-  use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }
-
-  use 'tpope/vim-fugitive'
-
-  use {'nvim-lualine/lualine.nvim', 
-    requires = { 'nvim-tree/nvim-web-devicons', opt = true },
-    config = [[require('config.lualine')]], 
-  }
-  -- use {'akinsho/bufferline.nvim', tag = "*", 
-  --    requires = 'nvim-tree/nvim-web-devicons',
-  --    config = function() 
-  --      vim.opt.termguicolors = true
-  --      require('bufferline').setup({
-  --       highlights = {
-  --           fill = {
-  --             fg = NONE,
-  --             bg = NONE,
-  --           },
-  --           background = {
-  --             fg = NONE,
-  --             bg = NONE,
-  --           },
-  --         }
-  --     }) 
-  --    end 
-  -- }
-	-- use 'dense-analysis/ale'
-
-use { "lewis6991/hover.nvim", after = 'nvim-lspconfig', config = [[require('config.hover')]]}
---vim.o.background = 'light'
-
-	if PACKER_BOOTSTRAP then
-		require("packer").sync()
-	end
-  
 end)
---
-  -- use({
-  --   'rose-pine/neovim',
-  --   as = 'rose-pine',
-  --   config = function()
-  --     require('rose-pine').setup({
-  --       dim_nc_background = false,
-  --       disable_background = true,
-  --       disable_float_background = true,
-  --       highlight_groups = {
-  --       }
-  --     })
-  --     vim.cmd('colorscheme rose-pine-moon')
-  --     vim.cmd('set colorcolumn=')
-  --     vim.cmd [[hi clear CursorLine]]
-  --     vim.cmd [[hi CursorLine gui=underline cterm=underline guisp=gray30]]
-  --     vim.cmd [[hi LineNr ctermfg=gray guifg=#353535]]
-  --     vim.cmd [[hi TelescopeBorder guifg=#aaaaaa guibg=NONE]]
-  --     vim.cmd [[hi TelescopeNormal guibg=NONE]]
-  --     vim.cmd [[hi TelescopePreviewNormal guibg=NONE]]
-  --     vim.cmd [[hi TelescopePromptNormal guibg=NONE]]
-  --     vim.cmd [[hi TelescopeResultsNormal guibg=NONE]]
-  --     vim.cmd [[hi TelescopeTitle guibg=NONE]]
-  --     vim.cmd [[hi TelescopeSelection guibg=grey30]]
-  --     vim.cmd [[hi Comment guifg=#637777]]
-  --     vim.cmd [[hi FloatBorder guifg=#aaaaaa]]
-  --   end
-  -- })
-  -- use ({"bluz71/vim-nightfly-colors",
-  --   config = function()
-  --     vim.g.nightflyTransparent = true
-  --     vim.cmd('colorscheme nightfly')
-  --     vim.cmd('set colorcolumn=')
-  --     vim.cmd [[hi clear CursorLine]]
-  --     vim.cmd [[hi CursorLine gui=underline cterm=underline guisp=gray30]]
-  --     vim.cmd [[hi LineNr ctermfg=gray guifg=#353535]]
-  --     vim.cmd [[hi TelescopeBorder guifg=#aaaaaa guibg=NONE]]
-  --     vim.cmd [[hi TelescopeNormal guibg=NONE]]
-  --     vim.cmd [[hi TelescopePreviewNormal guibg=NONE]]
-  --     vim.cmd [[hi TelescopePromptNormal guibg=NONE]]
-  --     vim.cmd [[hi TelescopeResultsNormal guibg=NONE]]
-  --     vim.cmd [[hi TelescopeTitle guibg=NONE]]
-  --     vim.cmd [[hi TelescopeSelection guibg=grey30]]
-  --     vim.cmd [[hi Comment guifg=#637777]]
-  --     vim.cmd [[hi FloatBorder guifg=#aaaaaa]]
-  --     vim.cmd([[highlight DiagnosticVirtualTextError guibg=NONE]])
-  --     vim.cmd([[highlight DiagnosticVirtualTextWarn guibg=NONE]])
-  --     vim.cmd([[highlight DiagnosticVirtualTextInfo guibg=NONE]])
-  --     vim.cmd([[highlight DiagnosticVirtualTextHint guibg=NONE]])
-  --   end
-  -- })
-  -- use ({"EdenEast/nightfox.nvim",
-  --   config = function()
-  --     require('nightfox').setup({
-  --       options = {
-  --         transparent = true,
-  --       }
-  --     })
-  --     vim.cmd('colorscheme duskfox')
-  --     vim.cmd('set colorcolumn=')
-  --     vim.cmd [[hi clear CursorLine]]
-  --     vim.cmd [[hi CursorLine gui=underline cterm=underline guisp=gray30]]
-  --     vim.cmd [[hi LineNr ctermfg=gray guifg=#353535]]
-  --     vim.cmd [[hi TelescopeBorder guifg=#aaaaaa guibg=NONE]]
-  --     vim.cmd [[hi TelescopeNormal guibg=NONE]]
-  --     vim.cmd [[hi TelescopePreviewNormal guibg=NONE]]
-  --     vim.cmd [[hi TelescopePromptNormal guibg=NONE]]
-  --     vim.cmd [[hi TelescopeResultsNormal guibg=NONE]]
-  --     vim.cmd [[hi TelescopeTitle guibg=NONE]]
-  --     vim.cmd [[hi TelescopeSelection guibg=grey30]]
-  --     vim.cmd [[hi Comment guifg=#637777]]
-  --     vim.cmd [[hi FloatBorder guifg=#aaaaaa]]
-  --     vim.cmd([[highlight DiagnosticVirtualTextError guibg=NONE]])
-  --     vim.cmd([[highlight DiagnosticVirtualTextWarn guibg=NONE]])
-  --     vim.cmd([[highlight DiagnosticVirtualTextInfo guibg=NONE]])
-  --     vim.cmd([[highlight DiagnosticVirtualTextHint guibg=NONE]])
-  --   end
-  -- })
+
