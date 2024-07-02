@@ -8,36 +8,40 @@ font pango:monospace 12
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
 
+### Autostart ###
 exec --no-startup-id "syncthing -no-browser"
 exec --no-startup-id "udiskie -ans"
-exec feh --bg-scale /home/sav/doc/pics/swamp.jpg
+exec --no-startup-id "/home/sav/.bin/pcloud"
+#exec feh --bg-scale /home/sav/doc/pics/swamp.jpg
+exec feh --bg-scale /home/sav/git/dotfiles/wallpapers/442312.jpg
 exec --no-startup-id polybar main
 exec --no-startup-id "picom"
-exec --no-startup-id setxkbmap -layout us,ru -option 'grp:caps_toggle'
+exec --no-startup-id "sleep 10 && setxkbmap -layout us,ru -option 'grp:caps_toggle'"
 exec --no-startup-id xset -dpms
 exec --no-startup-id xset s off
-
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id "xdotool behave_screen_edge top-left exec rofi -kb-cancel 'Escape,F12' -combi-modi drun#run -show combi"
 exec --no-startup-id nm-applet
-
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex-autostart --autostart --environment i3
 
-exec kitty --name quick_term
-for_window [instance="quick_term"] floating enable, resize set 2000 1200, move scratchpad, border pixel 2
-bindsym $mod+Return [instance="quick_term"] scratchpad show; move position center
+### Window rules ###
 
-exec ~/.config/i3/start_assistant.sh
-for_window [instance="assistant"] floating enable, resize set 2000 1200, move scratchpad, border pixel 2
-bindsym $mod+n [instance="assistant"] scratchpad show; move position center
+for_window [class="mpv"] fullscreen disable, floating enable, resize set 2000 1200, move position center
 
-exec kitty --name system_monitor bpytop
-for_window [instance="system_monitor"] floating enable, resize set 2000 1200, move scratchpad, border pixel 2
-bindsym F12 [instance="system_monitor"] scratchpad show; move position center
+exec alacritty --class quick_term
+for_window [instance="quick_term"] floating enable, resize set 2000 1200, move scratchpad
+bindsym F12 [instance="quick_term"] scratchpad show
 
 exec xinput set-prop "ELAN0522:01 04F3:31C3 Touchpad" "libinput Tapping Enabled" 1
+
+#bindsym $mod+m floating enable, resize set 3760 2070, move position 40 70
+bindsym $mod+c floating enable, resize set 1850 2047, move position 960 73
+#bindsym $mod+Left floating enable, resize set 1850 2047, move position 43 73
+#bindsym $mod+Right floating enable, resize set 1850 2047, move position 1947 73
+
+bindsym $mod+t exec alacritty
+bindsym $mod+f exec thunar
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -55,7 +59,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Use Mouse+$mod to drag floating windows to their wanted position
-#floating_modifier $mod
+floating_modifier $mod
 
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
@@ -64,7 +68,8 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym $mod+p exec ~/.config/i3/lock.sh
 
 # kill focused window
-bindsym $mod+Escape kill
+#bindsym Mod1+F4 kill
+bindsym $mod+Shift+q kill
 
 # change focus
 bindsym $mod+Tab focus left
@@ -74,10 +79,10 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+#bindsym $mod+Left focus left
+#bindsym $mod+Down focus down
+#bindsym $mod+Up focus up
+#bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -109,11 +114,11 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
-bindsym $mod+o workspace back_and_forth
+bindsym Mod1+Tab workspace back_and_forth
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -161,7 +166,9 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-bindcode --release 133 exec rofi -kb-cancel "Super_L" -combi-modi drun#run -show combi 
+#bindcode --release 133 exec rofi -kb-cancel "Super_L" -combi-modi drun#run -show combi 
+bindsym $mod+g exec "rofi -kb-cancel 'Escape' -combi-modi drun#run -show combi"
+bindsym $mod+space exec "rofi -kb-cancel 'Escape' -combi-modi window -show combi"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -171,16 +178,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym j resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 50 px or 50 ppt
+        bindsym k resize grow height 50 px or 50 ppt
+        bindsym j resize shrink height 50 px or 50 ppt
+        bindsym l resize grow width 50 px or 50 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 50 px or 50 ppt
+        bindsym Down resize grow height 50 px or 50 ppt
+        bindsym Up resize shrink height 50 px or 50 ppt
+        bindsym Right resize grow width 50 px or 50 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -221,11 +228,11 @@ gaps top 25
 #client.focused #4c7899 #285577 #ffffff #2e9ef4 #285577
 #client.focused_inactive #333333 #5f676a #ffffff #484e50 #5f676a
 
-client.focused #aaaaaa #30303011 #ffffff #2e9ef4 #285577
-client.unfocused #00000000 #ffffff00 #ffffff #2e9ef4 #285577
+client.focused #cccccc #30303011 #ffffff #2e9ef4 #ffffff00
+client.unfocused #00000000 #ffffff00 #ffffff #2e9ef4 #00000055
 client.focused_inactive #333333 #5f676a #ffffff #484e50 #5f676a
 
 #client.unfocused #333333 #222222 #888888 #292d2e #222222 
-#client.urgent #2f343a #900000 #ffffff #900000 #900000 
+client.urgent #aaaaaa #30303011 #ffffff #2e9ef4 #285577
 #client.placeholder #000000 #0c0c0c #ffffff #000000 #0c0c0c 
 #client.background #ffffff
