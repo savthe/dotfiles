@@ -120,10 +120,7 @@ module-margin-right = 3
 ;   font-3 = FontAwesome:size=10
 ; See the Fonts wiki page for more details
 
-;font-0 = "Droid Sans:size=12:weight=bold;3"
-;font-0 = "Droid Sans:size=16;3"
-font-0 = "Inconsolata:size=16;3" 
-font-1 = "Iosevka Nerd Font:size=16;3"
+font-0 = "FantasqueSansM Nerd Font:size=15"
 
 ; Modules are added to one of the available blocks
 ;   modules-left = cpu ram
@@ -161,7 +158,7 @@ locale =
 ;   center
 ;   right
 ;   none
-tray-position = right
+tray-position = none
 
 ; If true, the bar will not shift its
 ; contents when the tray changes
@@ -957,9 +954,7 @@ ramp-free-7 = █
 type = internal/fs
 interval = 25
 
-;mount-0 = /
-mount-0 = /mnt/ssd
-mount-1 = /mnt/data
+mount-0 = /
 
 label-mounted = %{F#F0C674}%mountpoint%%{F-} %percentage_used%%
 ;label-mounted = %{F#F0C674}ssd%{F-} %percentage_used%%
