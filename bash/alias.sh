@@ -1,6 +1,6 @@
 alias sm="ssh -p 2022 localhost"
 alias addkeys="ssh-add ~/.ssh/id_ed25519 ~/.ssh/id_rsa"
-alias r="ranger"
+alias r='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias um="udiskie-umount"
 alias btop="bpytop"
 alias ben="~/git/benny_converter/benny_conv.py"
