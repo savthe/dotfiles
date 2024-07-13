@@ -658,14 +658,6 @@ label-warn = CPU %percentage%%
 
 ; Spacing (number of spaces, pixels, points) between individual per-core ramps
 ramp-coreload-spacing = 0
-;ramp-coreload-0 = ▁
-;ramp-coreload-1 = ▂
-;ramp-coreload-2 = ▃
-;ramp-coreload-3 = ▄
-;ramp-coreload-4 = ▅
-;ramp-coreload-5 = ▆
-;ramp-coreload-6 = ▇
-;ramp-coreload-7 = █
 ramp-coreload-0 = %{F#333}▁%{F-}
 ramp-coreload-1 = %{F#444}▂%{F-}    
 ramp-coreload-2 = %{F#555}▃%{F-}    
@@ -674,6 +666,7 @@ ramp-coreload-4 = %{F#777}▅%{F-}
 ramp-coreload-5 = %{F#888}▆%{F-}    
 ramp-coreload-6 = %{F#999}▇%{F-}    
 ramp-coreload-7 = %{F#aaa}█%{F-} 
+
 [module/i3]
 type = internal/i3
 
@@ -891,7 +884,7 @@ format = <label>
 ;   %mb_swap_free%
 ;   %mb_swap_used%
 ;label = RAM %gb_used%/%gb_free%
-label = %{F#F0C674}RAM%{F-} %percentage_used%%, %{F#F0C674}Swap%{F-} %percentage_swap_used%%
+label = %{F#F0C674}Mem%{F-} %percentage_used%%, %{F#F0C674}Swp%{F-} %percentage_swap_used%%
 
 ; Available tokens:
 ;   %percentage_used% (default)
