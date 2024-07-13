@@ -891,7 +891,7 @@ format = <label>
 ;   %mb_swap_free%
 ;   %mb_swap_used%
 ;label = RAM %gb_used%/%gb_free%
-label = RAM %percentage_used%%, swap %percentage_swap_used%%
+label = %{F#F0C674}RAM%{F-} %percentage_used%%, %{F#F0C674}Swap%{F-} %percentage_swap_used%%
 
 ; Available tokens:
 ;   %percentage_used% (default)
@@ -955,8 +955,10 @@ type = internal/fs
 interval = 25
 
 mount-0 = /
+mount-1 = /mnt/ssd
+mount-2 = /mnt/data
 
-label-mounted = %{F#F0C674}%mountpoint%%{F-} %percentage_used%%
+label-mounted = %{F#F0C674}%mountpoint%%{F-} %percentage_used%%,
 ;label-mounted = %{F#F0C674}ssd%{F-} %percentage_used%%
 
 label-unmounted = %mountpoint% not mounted
