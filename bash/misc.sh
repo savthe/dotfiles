@@ -7,5 +7,5 @@ if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
   source /usr/share/powerline/bindings/bash/powerline.sh
 fi
 
-export EDITOR=~/nvim.appimage
+export EDITOR=~/.bin/nvim.appimage
 export BAT_THEME=Dracula
