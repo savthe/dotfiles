@@ -4,12 +4,7 @@ local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
 	PACKER_BOOTSTRAP = fn.system({
-		"git",
-		"clone",
-		"--depth",
-		"1",
-		"https://github.com/wbthomason/packer.nvim",
-		install_path,
+		"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path,
 	})
 	print("Installing packer close and reopen Neovim...")
 	vim.cmd([[packadd packer.nvim]])
@@ -41,14 +36,18 @@ packer.init({
 -- Install plugins
 return packer.startup(function(use)
 	--use { 'lewis6991/impatient.nvim', config = [[require('impatient')]] }
-
+  use {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      config = [[require("mason").setup()]]
+  }
 	use { 'wbthomason/packer.nvim' } -- Have packer manage itself	
-
-	use { 'dracula/vim', config = [[require('config.dracula')]] }
-  --use { 'haishanh/night-owl.vim', as = 'night-owl', config = [[require('config.night-owl')]] }
-  --use { 'catppuccin/nvim', as = "catppuccin", config = [[require('config.catppuccin')]] }
-  --use { 'yasukotelin/shirotelin', config = [[require('config.shirotelin')]] }
-  --use { "EdenEast/nightfox.nvim", config = [[require('config.nightfox')]] }
+  use { 'christoomey/vim-tmux-navigator' } 
+  
+  use { 'Mofiqul/dracula.nvim', config = [[require('config.dracula')]]  }
+  use {'nyoom-engineering/oxocarbon.nvim'}
+  use { 'yasukotelin/shirotelin' }
+  use { 'f-person/auto-dark-mode.nvim', config = [[require('config.auto-dark-mode')]]}
 
   use { 'majutsushi/tagbar' }
   use { 'nvim-tree/nvim-web-devicons' }

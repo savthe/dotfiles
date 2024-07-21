@@ -22,10 +22,13 @@ vim.cmd [[
 autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml,htmljinja,rust setlocal shiftwidth=2 tabstop=2
 ]]
 
-opt.so = 5                   --Отступ курсора от края экрана
---opt.foldcolumn = '2'         --Ширина колонки для фолдов
-opt.signcolumn = 'number'         --Ширина колонки для фолдов
-opt.colorcolumn =  '119'     --Расположение цветной колонки
+-- Screen padding
+opt.so = 5
+
+-- Fold column width
+--opt.foldcolumn = '2'
+opt.signcolumn = 'number'
+opt.colorcolumn =  '119'
 
 -- remove line lenght marker for selected filetypes
 vim.cmd [[autocmd FileType text,markdown,html,xhtml,javascript setlocal cc=0]]
@@ -33,12 +36,11 @@ vim.cmd [[autocmd FileType text,markdown,html,xhtml,javascript setlocal cc=0]]
 opt.cursorline = true  
 opt.termguicolors = true
 
--- Компактный вид у тагбара и Отк. сортировка по имени у тагбара
 vim.g.tagbar_compact = 1
 vim.g.tagbar_sort = 0
 
-opt.ignorecase = true        --Игнорировать размер букв
-opt.smartcase = true         --Игнор прописных буквj
+opt.ignorecase = true
+opt.smartcase = true
 
 opt.foldmethod = 'indent'
 opt.foldnestmax = 1
