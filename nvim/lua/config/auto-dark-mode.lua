@@ -3,6 +3,7 @@ local auto_dark_mode = require('auto-dark-mode')
 auto_dark_mode.setup({
 	update_interval = 1000,
 	set_dark_mode = function()
+		vim.cmd('colorscheme default')
 		vim.api.nvim_set_option('background', 'dark')
 		vim.cmd('colorscheme dracula')
 
@@ -33,6 +34,7 @@ auto_dark_mode.setup({
     vim.cmd([[highlight DiagnosticVirtualTextHint guibg=NONE]])
 	end,
 	set_light_mode = function()
+		vim.cmd('colorscheme default')
 		vim.api.nvim_set_option('background', 'light')
 		vim.cmd('colorscheme shirotelin')
 
