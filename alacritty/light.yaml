@@ -1,0 +1,11 @@
+import: 
+ - /home/sav/.config/alacritty/atom_one_light.yaml
+
+window:
+  opacity: 0.9
+
+colors:
+  primary:
+    background: '#ffffff'
+
+

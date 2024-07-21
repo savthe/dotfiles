@@ -1,0 +1,10 @@
+import: 
+ - /home/sav/.config/alacritty/dracula.yaml
+
+window:
+  opacity: 0.7
+
+colors:
+  primary:
+    background: '#101710'
+
