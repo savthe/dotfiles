@@ -12,5 +12,7 @@ alias vbash="~/.bin/nvim.appimage ~/git/dotfiles/bash && source ~/.bashrc"
 alias ai="firejail --whitelist=/home/sav/.bin /home/sav/.bin/tgpt -i"
 alias toggle_light="source ~/git/dotfiles/bash/toggle_light.sh"
 
+alias cpu_slow="sudo cpupower frequency-set --min 400mhz --max 800mhz --related"
+alias cpu_fast="sudo cpupower frequency-set --min 400mhz --max 4200mhz --related"
 WP_RESOLUTION="3840x2160"
 alias wp="/home/sav/git/xwinwrap/xwinwrap -g $WP_RESOLUTION -ni -s -nf -b -un -ov -fdt -argb -- mpv --mute=yes --no-audio --no-osc --no-osd-bar --quiet --screen=0 --geometry=$WP_RESOLUTION+0+0 -wid WID --loop"
