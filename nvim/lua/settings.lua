@@ -20,6 +20,7 @@ opt.shiftwidth = 2
 -- 2 spaces for selected filetypes
 vim.cmd [[
 autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml,htmljinja,rust setlocal shiftwidth=2 tabstop=2
+autocmd FocusGained * checktime
 ]]
 
 -- Screen padding
@@ -57,4 +58,9 @@ autocmd!
 autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=300}
 augroup end
 ]], false)
-
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+  command = "if mode() != 'c' | checktime | endif",
+  pattern = { "*" },
+})
+--vim.cmd 'colorscheme dracula'
